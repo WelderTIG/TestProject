@@ -1,0 +1,16 @@
+<button (click)="showFighter(hero)">
+        Get hero
+</button>
+
+
+<div *ngFor="let hero of hero" >
+        <ul>
+          <li>Race : {{hero.description}}</li>
+          <li>Name : {{ hero.name }}</li>
+          <li>Strenght : {{hero.strength}}</li>
+          <li>Agility : {{hero.agility}}  </li>
+        </ul>
+</div>
+
+
+              

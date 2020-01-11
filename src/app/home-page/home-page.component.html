@@ -1,0 +1,15 @@
+<div class="card">
+    <ul>
+    <li *ngFor="let fighter of fighters">
+            <button (click)="addToFight(fighter)">
+                    <ul>
+                        <li>Race : {{fighter.description}}</li>
+                        <li>Name : {{ fighter.name }}</li>
+                        <li>Strenght : {{fighter.strength}}</li>
+                        <li>Agility : {{fighter.agility}}  </li>
+                    </ul>
+                </button>              
+        </li>
+    </ul>  
+</div>    
+    
