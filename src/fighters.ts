@@ -1,7 +1,7 @@
 export const fighters = [
     {
         name: 'Footman',
-        str: 10,
+        str: 20,
         agil: 25,
         desc: 'Human'
     },
