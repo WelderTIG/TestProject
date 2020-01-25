@@ -26,7 +26,6 @@ export class HomePageComponent implements OnInit {
     this.fightersService.addToHero(fighter);
     this.hero = this.fightersService.items;
   }
-  
   addToFightOponent(oponent) {
     this.fightersService.addToEnemy(oponent);
     this.evilHero = this.fightersService.enemy;
