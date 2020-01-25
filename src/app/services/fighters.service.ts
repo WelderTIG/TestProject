@@ -6,24 +6,17 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FightersService {
-
-
-
-  items = [];
+  enemy;
+  items;
 
   constructor() { }
 
   addToHero(fighter) {
-    this.items.push(fighter);
+    this.items = fighter;
   }
 
-  getHeroes() {
-    return this.items;
-}
-
-clearHero() {
-  this.items = [];
-  return this.items;
+  addToEnemy(oponent) {
+  this.enemy = oponent;
 }
 
 }

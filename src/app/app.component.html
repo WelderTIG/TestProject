@@ -1,29 +1,25 @@
-<nav class="navbar">
-  <h1>
-    <a [routerLink]="['/']">Test Angular</a>
-  </h1>
-
-  <ul>
-    <li
-    routerLinkActive="active" 
-    [routerLinkActiveOptions]="{exact: true}"
-    >
-    <a [routerLink]="['/']">Home Page</a></li>
-
-    <li routerLinkActive="active"><a [routerLink]="['/fight']">Fight</a></li>
-    <li routerLinkActive="active"><a [routerLink]="['/stats']">Stats</a></li>
-  </ul>
-
-
-  <!-- <button class="btn">Драка</button>
-  <button class="btn">Статы</button> -->
-</nav>
-
-
 <div class="container">
-  <div class="card">
-    
-    <router-outlet></router-outlet>
-
+  <nav class="navbar">
+    <h1 routerLinkActive="active">
+      <a [routerLink]="['/details']">Project details</a>
+    </h1>
+  
+    <ul>
+      <li
+      routerLinkActive="active" 
+      [routerLinkActiveOptions]="{exact: true}"
+      >
+      <a [routerLink]="['/']">Home Page</a></li>
+  
+      <li routerLinkActive="active"><a [routerLink]="['/fight']">Fight</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/stats']">Stats</a></li>
+    </ul>
+  
+  </nav>
+  
+  
+  <div>
+      <router-outlet></router-outlet>
   </div>
+  
 </div>

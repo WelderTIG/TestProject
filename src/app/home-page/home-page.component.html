@@ -1,15 +1,61 @@
-<div class="card">
-    <ul>
-    <li *ngFor="let fighter of fighters">
-            <button (click)="addToFight(fighter)">
-                    <ul>
-                        <li>Race : {{fighter.description}}</li>
-                        <li>Name : {{ fighter.name }}</li>
-                        <li>Strenght : {{fighter.strength}}</li>
-                        <li>Agility : {{fighter.agility}}  </li>
-                    </ul>
-                </button>              
-        </li>
-    </ul>  
-</div>    
+<div class="mainfield">   
+        <div class="leftbar">
+            <!-- <ul>
+            <li *ngFor="let fighter of fighters">
+                    <button (click)="addToFight(fighter)">
+                            <ul>
+                                <li>Race : {{fighter.description}}</li>
+                                <li>Name : {{ fighter.name }}</li>
+                                <li>Strenght : {{fighter.strength}}</li>
+                                <li>Agility : {{fighter.agility}}  </li>
+                            </ul>
+                        </button>              
+                </li>
+            </ul>   -->
+            <button class="hero-btn" *ngFor="let fighter of fighters" (click)="addToFight(fighter)">
+                <p>Name: {{ fighter.name }}</p>
+                <p>Race: {{ fighter.description }}</p>
+                <p>Strength: {{ fighter.strength }}</p>
+                <p>Agility: {{ fighter.agility }}</p>
+            </button>
+        </div>    
+
+        <div class="field">
+            <div class="card">
+                <p>Name: {{ hero.name }}</p>
+                <p>Race: {{ hero.desc }}</p>
+                <p>Strength: {{ hero.str }}</p>
+                <p>Agility: {{ hero.agil }}</p>
+            </div>
+            <div class="card">
+                <p>Name: {{ evilHero.name }}</p>
+                <p>Race: {{ evilHero.desc }}</p>
+                <p>Strength: {{ evilHero.str }}</p>
+                <p>Agility: {{ evilHero.agil }}</p>
+            </div>
+        </div>
+
+        <div class="rightbar">
+            <!-- <ul>
+            <li *ngFor="let oponent of fighters">
+                    <button (click)="addToFightOponent(oponent)">
+                            <ul>
+                                <li>Race : {{oponent.description}}</li>
+                                <li>Name : {{ oponent.name }}</li>
+                                <li>Strenght : {{oponent.strength}}</li>
+                                <li>Agility : {{oponent.agility}}  </li>
+                            </ul>
+                        </button>              
+                </li>
+            </ul>   -->
+            <button class="hero-btn" *ngFor="let oponent of fighters" (click)="addToFightOponent(oponent)">
+                <p>Name: {{ oponent.name }}</p>
+                <p>Race: {{ oponent.description }}</p>
+                <p>Strength: {{ oponent.strength }}</p>
+                <p>Agility: {{ oponent.agility }}</p>
+            </button>
+        </div>  
     
+      
+</div>
+<button class="btn" (click)="goToFight()">TO FIGHT</button>  

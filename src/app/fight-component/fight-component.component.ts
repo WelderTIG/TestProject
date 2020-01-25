@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class FightComponentComponent implements OnInit {
 
   hero;
+  evilHero;
 
 
   constructor(
@@ -18,13 +19,14 @@ export class FightComponentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.hero = this.fightersService.items;
+    this.evilHero = this.fightersService.enemy;
 
   }
-
-  showFighter() {
-    this.hero = this.fightersService.getHeroes();
-  }
-
+  // showFighter() {
+  //   this.hero = this.fightersService.items;
+  //   this.evilHero = this.fightersService.enemy;
+  // }
 
 
 }

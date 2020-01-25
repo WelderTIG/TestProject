@@ -1,9 +1,9 @@
-<button (click)="showFighter(hero)">
+<!-- <button (click)="showFighter(hero)">
         Get hero
-</button>
+</button> -->
 
 
-<div *ngFor="let hero of hero" >
+<div class="card">
         <ul>
           <li>Race : {{hero.description}}</li>
           <li>Name : {{ hero.name }}</li>
@@ -11,6 +11,18 @@
           <li>Agility : {{hero.agility}}  </li>
         </ul>
 </div>
+<!-- <button (click)="showFighter(evilHero)">
+  Get hero
+</button> -->
 
+
+<div class="card">
+  <ul>
+    <li>Race : {{evilHero.description}}</li>
+    <li>Name : {{ evilHero.name }}</li>
+    <li>Strenght : {{evilHero.strength}}</li>
+    <li>Agility : {{evilHero.agility}}  </li>
+  </ul>
+</div>
 
               
