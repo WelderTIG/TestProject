@@ -1,4 +1,5 @@
-import { FightersService } from './../services/fighters.service';
+import { Router } from '@angular/router';
+import { FightersService, Person } from './../services/fighters.service';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -10,23 +11,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FightComponentComponent implements OnInit {
 
-  hero;
-  evilHero;
+  hero: Person;
+  evilHero: Person;
 
 
   constructor(
-    private fightersService: FightersService
+    private fightersService: FightersService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.hero = this.fightersService.items;
-    this.evilHero = this.fightersService.enemy;
+    this.hero = this.fightersService.hero1;
+    this.evilHero = this.fightersService.hero2;
 
   }
   // showFighter() {
-  //   this.hero = this.fightersService.items;
-  //   this.evilHero = this.fightersService.enemy;
+  //   this.hero = this.fightersService.hero1;
+  //   this.evilHero = this.fightersService.hero2;
   // }
+  goToHome() {
+    this.router.navigate(['/']);
+  }
 
 
 }

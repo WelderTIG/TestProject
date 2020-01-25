@@ -11,21 +11,28 @@
 //   padding: 1rem;
 // }
 
-// .active {
-//   font-weight: bold;
-//   color:#b90303;
-//   cursor: default;
-// }
+.active {
+  font-weight: bold;
+  color:#b90303;
+  cursor: default;
+}
+
+.container {
+  display: block;
+  background-color: #cccccc;
+  max-width: 1000px;
+  height: 600px;
+  margin: 0 auto;
+  padding: 0;   
+  opacity: 0.7;
+}
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 2rem;
-  z-index: 1;
   width: 100%;
   opacity: 0.9;
-  margin-bottom: 1rem;
   background: #35dc51;
   color: #fff;
   ul {
@@ -65,21 +72,13 @@ ul {
   list-style: none;
 }
 
-.container {
-  display: block;
-  background-color: #cccccc;
-  max-width: 1000px;
-  height: 600px;
-  margin: 0 auto;
-  padding: 0;   
-  opacity: 0.7;
-}
 
-.nav {
-  display: flex;
-  background-color: red;
-  height: 150px;
-}
+
+// .nav {
+//   display: flex;
+//   background-color: red;
+//   height: 150px;
+// }
 
 .mainfield {
   display: flex;
@@ -122,7 +121,7 @@ ul {
 }
 
 .hero-btn {
-  background-color: #515151;
+  background-color: #e2dbdb;
 }
 
 .card {

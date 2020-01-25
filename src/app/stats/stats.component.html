@@ -1,1 +1,12 @@
-<p>stats works!</p>
+<div class="mainfield">
+    <canvas baseChart width="500" height="500"
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+    </canvas>
+</div>
+<!-- <button (click)="fight()">Fight</button>
+<button (click)="addToData()">Add to stats</button> -->

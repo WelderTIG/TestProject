@@ -1,23 +1,20 @@
 export const fighters = [
     {
-        id: 1,
         name: 'Footman',
-        strength: 25,
-        agility: 20,
-        description: 'Human'
+        str: 30,
+        agil: 25,
+        desc: 'Human'
     },
     {
-        id: 2,
         name: 'Grunt',
-        strength: 30,
-        agility: 15,
-        description: 'Orc'
+        str: 30,
+        agil: 50,
+        desc: 'Orc'
     },
     {
-        id: 3,
         name: 'Wall',
-        strength: 100,
-        agility: 1,
-        description: 'Wall'
+        str: 100,
+        agil: 1,
+        desc: 'Wall'
     },
 ];

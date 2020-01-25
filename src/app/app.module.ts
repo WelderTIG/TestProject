@@ -8,6 +8,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { FightComponentComponent } from './fight-component/fight-component.component';
 import { StatsComponent } from './stats/stats.component';
 import { DetailsComponent } from './details/details.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DetailsComponent } from './details/details.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ChartsModule
   ],
   providers: [
     FightersService
