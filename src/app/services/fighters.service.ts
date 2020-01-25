@@ -1,5 +1,4 @@
-
-
+import { FightComponentComponent } from './../fight-component/fight-component.component';
 import { Injectable } from '@angular/core';
 
 export interface Person {
@@ -17,35 +16,33 @@ export interface Person {
   providedIn: 'root'
 })
 export class FightersService {
-  hero2: Person;
-  hero1: Person;
+  
+  public hero: Person;
+  public evilHero: Person;
  
-  a: number
-  b: number
-  c: number
-  d: number
-  resHpHero1: number 
-  resHpHero2: number 
-  dataResHp1: Array<number> = []
-  dataResHp2: Array<number> = []
-  dataFightNum: Array<string> = []
+  public dataResHp1: Array<number> = [];
+  public dataResHp2: Array<number> = [];
+  public dataFightNum: Array<string> = [];
+
 
   constructor() { }
 
   addToHero(fighter: Person) {
-    this.hero1 = fighter;
-    this.hero1.hp = this.hero1.str * 10
-    this.hero1.dmg = this.hero1.str
-    this.hero1.arm = this.hero1.agil / 10
-    this.hero1.as = 10000 / this.hero1.agil
+    this.hero = fighter;
+    this.hero.hp = this.hero.str * 10
+    this.hero.dmg = this.hero.str
+    this.hero.arm = this.hero.agil / 10
+    this.hero.as = 100000 / this.hero.agil
   }
 
   addTohero2(oponent: Person) {
-    this.hero2 = oponent;
-    this.hero2.hp = this.hero2.str * 10
-    this.hero2.dmg = this.hero2.str
-    this.hero2.arm = this.hero2.agil / 10
-    this.hero2.as = 10000 / this.hero2.agil
+    this.evilHero = oponent;
+    this.evilHero.hp = this.evilHero.str * 10
+    this.evilHero.dmg = this.evilHero.str
+    this.evilHero.arm = this.evilHero.agil / 10
+    this.evilHero.as = 100000 / this.evilHero.agil
   }
+  
 
+  
 }

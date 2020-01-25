@@ -1,7 +1,7 @@
 export const fighters = [
     {
         name: 'Footman',
-        str: 30,
+        str: 10,
         agil: 25,
         desc: 'Human'
     },
@@ -13,7 +13,7 @@ export const fighters = [
     },
     {
         name: 'Wall',
-        str: 100,
+        str: 10,
         agil: 1,
         desc: 'Wall'
     },

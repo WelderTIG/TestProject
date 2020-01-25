@@ -5,10 +5,15 @@
 <div class="mainfield">
   <div class="card">
     <ul>
-      <li>Race : {{hero.desc}}</li>
-      <li>Name : {{ hero.name }}</li>
-      <li>Strenght : {{hero.str}}</li>
-      <li>Agility : {{hero.agil}}  </li>
+      <li>Name : {{ this.hero1.name }}</li>
+      <li>Health: {{ this.hero1.hp }}</li>
+      <li>Damage: {{ this.hero1.dmg }}</li>
+      <li>Atack Speed: {{ this.hero1.as }}</li>
+      <li>Armor: {{ this.hero1.arm }}</li>
+      <li>Bone A: {{ a }}</li>    
+      <li>Bone B: {{ b }}</li>   
+      <li>resHpHero1: {{ resHpHero1 }}</li> 
+      <li>data1: {{ fightersService.dataResHp1[0] }}</li>     
     </ul>
   </div>  
   <!-- <button (click)="showFighter(evilHero)">
@@ -18,16 +23,22 @@
 
   <div class="card">
     <ul>
-      <li>Race : {{evilHero.desc}}</li>
-      <li>Name : {{ evilHero.name }}</li>
-      <li>Strenght : {{evilHero.str}}</li>
-      <li>Agility : {{evilHero.agil}}  </li>
+      <li>Name : {{ this.hero2.name }}</li>
+      <li>Health: {{ this.hero2.hp }}</li>
+      <li>Damage: {{ this.hero2.dmg }}</li>
+      <li>Atack Speed: {{ this.hero2.as }}</li>
+      <li>Armor: {{ this.hero2.arm }}</li>  
+      <li>Bone C: {{ c }}</li>    
+      <li>Bone D: {{ d }}</li>   
+      <li>resHpHero1: {{ resHpHero2 }}</li> 
+      <li>data1: {{ fightersService.dataResHp2[0] }}</li> 
     </ul>
   </div>
 </div>
-<button class="btn" (click)="goToHome()">Go Home</button> 
-<!-- <button class="btn" (click)="goToFight()">Start Fight</button>  
-<button class="btn" (click)="goToFight()">Start Async</button>   -->
+<!-- <button class="btn" (click)="goToHome()">Go Home</button>  -->
+<button class="btn" (click)="fightCicle()">Fight cicle</button>  
+<!-- <button class="btn" (click)="fightCicleAsync()">Start Async</button>   -->
+<button class="btn" (click)="testBalance()">test balance</button>  
 
 
               

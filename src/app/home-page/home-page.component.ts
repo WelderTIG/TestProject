@@ -11,8 +11,8 @@ import { fighters } from 'src/fighters';
 })
 export class HomePageComponent implements OnInit {
   fighters = fighters;
-  hero: Person
-  evilHero: Person
+  hero1: Person
+  hero2: Person
 
   constructor(
     private fightersService: FightersService,
@@ -37,9 +37,8 @@ export class HomePageComponent implements OnInit {
     this.router.navigate(['/fight']);
   }
   ngDoCheck() {
-    this.hero = this.fightersService.hero1;
-    this.evilHero = this.fightersService.hero2;
-
+    this.hero1 = this.fightersService.hero;
+    this.hero2 = this.fightersService.evilHero;
   }
 
 }
