@@ -10,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FightComponentComponent implements OnInit {
 
-  
+  intStopped1: boolean = false;
+  intStopped2: boolean = false;
   hero1: Person;
   hero2: Person;
   a: number
@@ -27,8 +28,8 @@ export class FightComponentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.hero1 = this.fightersService.hero;
-    this.hero2 = this.fightersService.evilHero;
+    this.hero1 = Object.create(this.fightersService.hero);
+    this.hero2 = Object.create(this.fightersService.evilHero);
   }
   goToHome() {
     this.router.navigate(['/']);
@@ -72,41 +73,58 @@ export class FightComponentComponent implements OnInit {
   }
   ____________________________________________________________________
   //Атака hero1 асинхрон
-  atackAsync1() {
+  atackAsync1() {      
       let fnc = setInterval(() => {
         this.bonesResHero1();
         this.tryToAttackHero1();
-        if (this.hero1.hp < 0 || this.hero2.hp < 0) {
-          clearInterval(fnc)
-          if (this.hero1.hp <= 0 || this.hero2.hp <= 0) {
-            this.resHpHero2 = -(this.hero2.hp)
-            this.resHpHero1 = 0
-            this.saveResHp2()
-          }
-        }
-      }, this.hero1.as)
+        if (this.hero2.hp <= 0 || this.hero1.hp <= 0) {
+            clearInterval(fnc);            
+            if (this.hero2.hp <= 0) {
+              this.resHpHero1 = this.hero1.hp
+              this.resHpHero2 = 0
+            } else if (this.hero1.hp <= 0) {
+              this.resHpHero2 = -(this.hero2.hp)
+              this.resHpHero1 = 0
+            }
+            this.intStopped1 = true;
+        } 
+      },this.hero1.as)
     }
   //Атака hero2 асинхрон
   atackAsync2() {  
-      let fnc2 = setInterval(() => {
+      const fnc2 = setInterval(() => {
         this.bonesResHero2();
         this.tryToAttackHero2();
-        if (this.hero2.hp < 0 || this.hero1.hp < 0) {
-          clearInterval(fnc2)
-          if (this.hero2.hp <= 0 || this.hero1.hp <= 0) {
-            this.resHpHero1 = this.hero1.hp
-            this.resHpHero2 = 0
-            this.saveResHp1()
-            this.addToLabel()
-          }  
-          }      
-      }, this.hero2.as)
+        if (this.hero1.hp <= 0 || this.hero2.hp <= 0) {
+            clearInterval(fnc2)              
+            if (this.hero2.hp <= 0) {
+              this.resHpHero1 = this.hero1.hp
+              this.resHpHero2 = 0
+            } else if (this.hero1.hp <= 0) {
+              this.resHpHero2 = -(this.hero2.hp)
+              this.resHpHero1 = 0
+            }
+            this.intStopped2 = true;          
+          }
+      },this.hero2.as)
     }
   
   //Раунд с учетом атак спид
-  fightProcessAsync() {
-      this.atackAsync1()
+  fightProcessAsync1() {                    
+          return new Promise((resolve) => {
+            this.atackAsync1()
+            if (this.resHpHero1 == 0) {
+              resolve()
+            }
+        })
+  }
+  fightProcessAsync2() {                    
+    return new Promise((resolve) => {
       this.atackAsync2()
+      if (this.resHpHero2 == 0) {
+        resolve()
+      }
+  })
 }
 ______________________________________________________________________
   //Добавление индекса с номером боя
@@ -135,6 +153,7 @@ ______________________________________________________________________
       this.resHpHero1 = 0
     }
     this.saveResHp()
+    
   }
   _____________________________________________________________________
   //Сохранение статистики по хп1
@@ -148,10 +167,25 @@ ______________________________________________________________________
 
   //Битва до <= 0 Async
   fightCicleAsync() {    
-      console.log('before')
-      this.fightProcessAsync()    
-      console.log('after')
-  }
+    let p1 = this.fightProcessAsync1().then(() => {
+      this.saveResHp1()
+      console.log('prom1')
+    }) 
+    .catch(() => console.log('error1 caught'))
+    
+    let p2 = this.fightProcessAsync2().then(() => {
+      this.saveResHp2()
+      console.log('prom2')
+    }) 
+    .catch(() => console.log('error2 caught'))
+      
+     
+    Promise.all([p1, p2]).then(() => {
+      console.log(this.resHpHero1)
+      console.log(this.resHpHero2)
+      this.addToLabel()
+      })
+    }
   // if (this.resHpHero1 === 0 || this.resHpHero2 === 0) {
   //   this.saveResHp()
   // }
@@ -161,7 +195,7 @@ ______________________________________________________________________
     //   console.log(p2)
     //   this.saveResHp()
     //   })
-    // }
+    // // }
 
   _______________________________________________________________________
   //Новый hero1 & hero2
@@ -179,8 +213,8 @@ ______________________________________________________________________
   //Много Битв (N)
   testBalanceAsync() {
     for (let i = 0; i < this.nFights; i++) {
-      this.mkHero()
-      this.fightProcessAsync();
+      this.mkHero();
+      this.fightCicleAsync();
     }
   }
 
