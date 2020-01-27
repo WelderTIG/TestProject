@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { FightersService, Person } from './../services/fighters.service';
 import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs'
 
 
 @Component({
@@ -110,10 +111,16 @@ export class FightComponentComponent implements OnInit {
     }
   
   //Раунд с учетом атак спид
+  fightProcessAsync() {                    
+      this.atackAsync1()
+      this.atackAsync2()
+}
+
+
   fightProcessAsync1() {                    
           return new Promise((resolve) => {
             this.atackAsync1()
-            if (this.resHpHero1 == 0) {
+            if (this.resHpHero1 === 0 || this.resHpHero2 === 0) {
               resolve()
             }
         })
@@ -121,7 +128,7 @@ export class FightComponentComponent implements OnInit {
   fightProcessAsync2() {                    
     return new Promise((resolve) => {
       this.atackAsync2()
-      if (this.resHpHero2 == 0) {
+      if (this.resHpHero2 === 0 || this.resHpHero1 === 0) {
         resolve()
       }
   })
@@ -145,10 +152,10 @@ ______________________________________________________________________
     while (this.hero2.hp > 0 && this.hero1.hp > 0) {
       this.fightProcess()
     }
-    if (this.hero2.hp < 0) {
+    if (this.hero2.hp <= 0) {
       this.resHpHero1 = this.hero1.hp
       this.resHpHero2 = 0
-    } else if (this.hero1.hp < 0) {
+    } else if (this.hero1.hp <= 0) {
       this.resHpHero2 = -(this.hero2.hp)
       this.resHpHero1 = 0
     }
@@ -166,36 +173,38 @@ ______________________________________________________________________
   } 
 
   //Битва до <= 0 Async
-  fightCicleAsync() {    
-    let p1 = this.fightProcessAsync1().then(() => {
-      this.saveResHp1()
-      console.log('prom1')
-    }) 
-    .catch(() => console.log('error1 caught'))
+  // fightCicleAsync() {    
+  //   let p1 = this.fightProcessAsync1().then(() => {
+  //     console.log('prom 1 then')
+  //   }) 
+  //   // .catch(() => console.log('error1 caught'))
     
-    let p2 = this.fightProcessAsync2().then(() => {
-      this.saveResHp2()
-      console.log('prom2')
-    }) 
-    .catch(() => console.log('error2 caught'))
+  //   let p2 = this.fightProcessAsync2().then(() => {
+  //     console.log('prom 1 then')
+  //   }) 
+  //   // .catch(() => console.log('error2 caught'))
       
      
-    Promise.all([p1, p2]).then(() => {
-      console.log(this.resHpHero1)
-      console.log(this.resHpHero2)
-      this.addToLabel()
-      })
-    }
-  // if (this.resHpHero1 === 0 || this.resHpHero2 === 0) {
-  //   this.saveResHp()
-  // }
+  //   Promise.all([p1, p2]).then(val => {
+  //     console.log('prom all then', val)
+  //     this.saveResHp()
+  //     })
+  //   }
 
-    // Promise.all([p1, p2]).then(() => {
-    //   console.log(p1)
-    //   console.log(p2)
-    //   this.saveResHp()
-    //   })
-    // // }
+
+
+    fightCicleAsync() {
+        this.fightProcessAsync()
+        setTimeout(() => {
+          if (this.resHpHero1 === 0 || this.resHpHero2 === 0) {
+            this.saveResHp()
+          }
+        }, 5000);      
+    }
+  
+
+  
+  
 
   _______________________________________________________________________
   //Новый hero1 & hero2
@@ -206,16 +215,20 @@ ______________________________________________________________________
   //Много Битв (N)
   testBalance() {
     for (let i = 0; i < this.nFights; i++) {
-      this.mkHero()
+      this.mkHero();
       this.fightCicle();
     }
   }
   //Много Битв (N)
   testBalanceAsync() {
-    for (let i = 0; i < this.nFights; i++) {
+    let fnc3 = setInterval(() => {
       this.mkHero();
       this.fightCicleAsync();
-    }
+      if (this.fightersService.dataFightNum.length > 10) {
+        clearInterval(fnc3)
+      }
+    },5500)
+    
   }
 
 }
