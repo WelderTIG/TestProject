@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { FightersService, Person } from './../services/fighters.service';
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs'
+
 
 
 @Component({
@@ -229,6 +229,10 @@ ______________________________________________________________________
       }
     },5500)
     
+  }
+
+  goToStats() {
+    this.router.navigate(['/stats']);
   }
 
 }

@@ -1,4 +1,4 @@
-import { FightComponentComponent } from './../fight-component/fight-component.component';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FightersService } from './../services/fighters.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
@@ -31,11 +31,15 @@ export class StatsComponent implements OnInit {
 
 
   constructor(
-    public fightersService: FightersService
+    public fightersService: FightersService,
+    private router: Router
   ) { }
 
   ngOnInit() {
 
+  }
+  goToHome() {
+    this.router.navigate(['/']);
   }
 
 }

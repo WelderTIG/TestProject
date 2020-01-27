@@ -35,14 +35,15 @@
     </ul>
   </div>
 </div>
-<!-- <button class="btn" (click)="goToHome()">Go Home</button>  -->
-<button class="btn" (click)="fightProcess()">Proc</button> 
-<button class="btn" (click)="fightCicle()">Cicle</button>  
-<button class="btn" (click)="testBalance()">Balance</button> 
+<button class="btn" (click)="goToHome()">Go Home</button> 
 <hr>
-<button class="btn" (click)="fightProcessAsync()">Async proc</button> 
-<button class="btn" (click)="fightCicleAsync()">Cicle async</button>  
-<button class="btn" (click)="testBalanceAsync()">Balance async</button>  
+<button class="btn" (click)="fightProcess()" (click)="goToStats()">Proc</button> 
+<button class="btn" (click)="fightCicle()" (click)="goToStats()">Cicle</button>  
+<button class="btn" (click)="testBalance()" (click)="goToStats()">Balance</button> 
+<hr>
+<button class="btn" (click)="fightProcessAsync()" (click)="goToStats()">Async proc</button> 
+<button class="btn" (click)="fightCicleAsync()" (click)="goToStats()">Cicle async</button>  
+<button class="btn" (click)="testBalanceAsync()" (click)="goToStats()">Balance async</button>  
  
 
 
