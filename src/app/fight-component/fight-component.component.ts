@@ -11,17 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FightComponentComponent implements OnInit {
 
-  intStopped1: boolean = false;
-  intStopped2: boolean = false;
+  intStopped1 = false;
+  intStopped2 = false;
   hero1: Person;
   hero2: Person;
-  a: number
-  b: number
-  c: number
-  d: number
-  resHpHero1: number 
-  resHpHero2: number 
-  nFights: number = 10
+  a: number;
+  b: number;
+  c: number;
+  d: number;
+  resHpHero1: number;
+  resHpHero2: number;
+  nFights = 10;
 
   constructor(
     public fightersService: FightersService,
@@ -36,155 +36,149 @@ export class FightComponentComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  //Кости от 1 до 6
+  // Кости от 1 до 6
   bonesThrow(min = 1, max =  6) {
-    let rand = min - 0.5 + Math.random() * (max - min + 1);
+    const rand = min - 0.5 + Math.random() * (max - min + 1);
     return Math.round(rand);
-  }  
-  //Кидаем кости для hero1
+  }
+  // Кидаем кости для hero1
   bonesResHero1() {
     this.a = this.bonesThrow();
     this.b = this.bonesThrow();
   }
-  //Кидаем кости для hero2
+  // Кидаем кости для hero2
   bonesResHero2() {
     this.c = this.bonesThrow();
     this.d = this.bonesThrow();
   }
-  //Атака hero1 против hero2
+  // Атака hero1 против hero2
   tryToAttackHero1() {
     if (this.a > this.b) {
-      this.hero2.hp = this.hero2.hp - (this.hero1.dmg - this.hero2.arm)
-    }    
-    return this.hero2.hp
+      this.hero2.hp = this.hero2.hp - (this.hero1.dmg - this.hero2.arm);
+    }
+    return this.hero2.hp;
   }
-  //Атака hero2 против hero1
+  // Атака hero2 против hero1
   tryToAttackHero2() {
     if (this.c > this.d) {
-      this.hero1.hp = this.hero1.hp - (this.hero2.dmg - this.hero1.arm)
-    }    
-    return this.hero1.hp
+      this.hero1.hp = this.hero1.hp - (this.hero2.dmg - this.hero1.arm);
+    }
+    return this.hero1.hp;
   }
-  //Раунд без учета скорости атаки
+  // Раунд без учета скорости атаки
   fightProcess() {
-      this.bonesResHero1()
-      this.tryToAttackHero1()
-      this.bonesResHero2()
-      this.tryToAttackHero2()
+      this.bonesResHero1();
+      this.tryToAttackHero1();
+      this.bonesResHero2();
+      this.tryToAttackHero2();
   }
-  ____________________________________________________________________
-  //Атака hero1 асинхрон
-  atackAsync1() {      
-      let fnc = setInterval(() => {
+
+  // Атака hero1 асинхрон
+  atackAsync1() {
+      const fnc = setInterval(() => {
         this.bonesResHero1();
         this.tryToAttackHero1();
         if (this.hero2.hp <= 0 || this.hero1.hp <= 0) {
-            clearInterval(fnc);            
+            clearInterval(fnc);
             if (this.hero2.hp <= 0) {
-              this.resHpHero1 = this.hero1.hp
-              this.resHpHero2 = 0
+              this.resHpHero1 = this.hero1.hp;
+              this.resHpHero2 = 0;
             } else if (this.hero1.hp <= 0) {
-              this.resHpHero2 = -(this.hero2.hp)
-              this.resHpHero1 = 0
+              this.resHpHero2 = -(this.hero2.hp);
+              this.resHpHero1 = 0;
             }
             this.intStopped1 = true;
-        } 
-      },this.hero1.as)
+        }
+      }, this.hero1.as);
     }
-  //Атака hero2 асинхрон
-  atackAsync2() {  
+  // Атака hero2 асинхрон
+  atackAsync2() {
       const fnc2 = setInterval(() => {
         this.bonesResHero2();
         this.tryToAttackHero2();
         if (this.hero1.hp <= 0 || this.hero2.hp <= 0) {
-            clearInterval(fnc2)              
+            clearInterval(fnc2);
             if (this.hero2.hp <= 0) {
-              this.resHpHero1 = this.hero1.hp
-              this.resHpHero2 = 0
+              this.resHpHero1 = this.hero1.hp;
+              this.resHpHero2 = 0;
             } else if (this.hero1.hp <= 0) {
-              this.resHpHero2 = -(this.hero2.hp)
-              this.resHpHero1 = 0
+              this.resHpHero2 = -(this.hero2.hp);
+              this.resHpHero1 = 0;
             }
-            this.intStopped2 = true;          
+            this.intStopped2 = true;
           }
-      },this.hero2.as)
+      }, this.hero2.as);
     }
-  
-  //Раунд с учетом атак спид
-  fightProcessAsync() {                    
-      this.atackAsync1()
-      this.atackAsync2()
+  // Раунд с учетом атак спид
+  fightProcessAsync() {
+      this.atackAsync1();
+      this.atackAsync2();
 }
 
 
-  fightProcessAsync1() {                    
+  fightProcessAsync1() {
           return new Promise((resolve) => {
-            this.atackAsync1()
+            this.atackAsync1();
             if (this.resHpHero1 === 0 || this.resHpHero2 === 0) {
-              resolve()
+              resolve();
             }
-        })
+        });
   }
-  fightProcessAsync2() {                    
+  fightProcessAsync2() {
     return new Promise((resolve) => {
-      this.atackAsync2()
+      this.atackAsync2();
       if (this.resHpHero2 === 0 || this.resHpHero1 === 0) {
-        resolve()
+        resolve();
       }
-  })
+  });
 }
-______________________________________________________________________
-  //Добавление индекса с номером боя
+  // Добавление индекса с номером боя
   addToLabel() {
-    const a = this.fightersService.dataResHp1.length
-    this.fightersService.dataFightNum.push(`${a}`)
+    const a = this.fightersService.dataResHp1.length;
+    this.fightersService.dataFightNum.push(`${a}`);
   }
-  //Сохранение статистики по хп
+  // Сохранение статистики по хп
   saveResHp() {
-    this.fightersService.dataResHp1.push(this.resHpHero1)
-    this.fightersService.dataResHp2.push(this.resHpHero2)
-    this.addToLabel()
-  } 
+    this.fightersService.dataResHp1.push(this.resHpHero1);
+    this.fightersService.dataResHp2.push(this.resHpHero2);
+    this.addToLabel();
+  }
 
-
-  //Битва до <= 0
+  // Битва до <= 0
   fightCicle() {
     while (this.hero2.hp > 0 && this.hero1.hp > 0) {
-      this.fightProcess()
+      this.fightProcess();
     }
     if (this.hero2.hp <= 0) {
-      this.resHpHero1 = this.hero1.hp
-      this.resHpHero2 = 0
+      this.resHpHero1 = this.hero1.hp;
+      this.resHpHero2 = 0;
     } else if (this.hero1.hp <= 0) {
-      this.resHpHero2 = -(this.hero2.hp)
-      this.resHpHero1 = 0
+      this.resHpHero2 = -(this.hero2.hp);
+      this.resHpHero1 = 0;
     }
-    this.saveResHp()
-    
+    this.saveResHp();
   }
-  _____________________________________________________________________
-  //Сохранение статистики по хп1
+  // Сохранение статистики по хп1
   saveResHp1() {
-    this.fightersService.dataResHp1.push(this.resHpHero1)
-  } 
-  //Сохранение статистики по хп2
+    this.fightersService.dataResHp1.push(this.resHpHero1);
+  }
+  // Сохранение статистики по хп2
   saveResHp2() {
-    this.fightersService.dataResHp2.push(this.resHpHero2)
-  } 
+    this.fightersService.dataResHp2.push(this.resHpHero2);
+  }
 
-  //Битва до <= 0 Async
-  // fightCicleAsync() {    
+  // Битва до <= 0 Async
+  // fightCicleAsync() {
   //   let p1 = this.fightProcessAsync1().then(() => {
   //     console.log('prom 1 then')
-  //   }) 
+  //   })
   //   // .catch(() => console.log('error1 caught'))
-    
+
   //   let p2 = this.fightProcessAsync2().then(() => {
   //     console.log('prom 1 then')
-  //   }) 
+  //   })
   //   // .catch(() => console.log('error2 caught'))
-      
-     
+
   //   Promise.all([p1, p2]).then(val => {
   //     console.log('prom all then', val)
   //     this.saveResHp()
@@ -194,41 +188,36 @@ ______________________________________________________________________
 
 
     fightCicleAsync() {
-        this.fightProcessAsync()
+        this.fightProcessAsync();
         setTimeout(() => {
           if (this.resHpHero1 === 0 || this.resHpHero2 === 0) {
-            this.saveResHp()
+            this.saveResHp();
           }
-        }, 5000);      
+        }, 5000);
     }
-  
 
-  
-  
 
-  _______________________________________________________________________
-  //Новый hero1 & hero2
+  // Новый hero1 & hero2
   mkHero() {
     this.hero1 = Object.create(this.fightersService.hero);
     this.hero2 = Object.create(this.fightersService.evilHero);
   }
-  //Много Битв (N)
+  // Много Битв (N)
   testBalance() {
     for (let i = 0; i < this.nFights; i++) {
       this.mkHero();
       this.fightCicle();
     }
   }
-  //Много Битв (N)
+  // Много Битв (N)
   testBalanceAsync() {
-    let fnc3 = setInterval(() => {
+    const fnc3 = setInterval(() => {
       this.mkHero();
       this.fightCicleAsync();
       if (this.fightersService.dataFightNum.length > 10) {
-        clearInterval(fnc3)
+        clearInterval(fnc3);
       }
-    },5500)
-    
+    }, 5500);
   }
 
   goToStats() {

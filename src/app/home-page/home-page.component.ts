@@ -1,6 +1,6 @@
 import { Router} from '@angular/router';
 import { FightersService, Person } from './../services/fighters.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { fighters } from 'src/fighters';
 
 
@@ -9,10 +9,10 @@ import { fighters } from 'src/fighters';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, DoCheck {
   fighters = fighters;
-  hero1: Person
-  hero2: Person
+  hero1: Person;
+  hero2: Person;
 
   constructor(
     private fightersService: FightersService,
@@ -21,10 +21,10 @@ export class HomePageComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.hero1 = null;
+    this.hero2 = null;
   }
 
-  
 
   addToFight(fighter: Person) {
     this.fightersService.addToHero(fighter);
