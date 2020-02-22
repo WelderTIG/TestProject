@@ -11,8 +11,8 @@ import { fighters } from 'src/fighters';
 })
 export class HomePageComponent implements OnInit, DoCheck {
   fighters = fighters;
-  hero1: Person;
-  hero2: Person;
+  hero1: Person = null;
+  hero2: Person = null;
 
   constructor(
     private fightersService: FightersService,
@@ -21,8 +21,7 @@ export class HomePageComponent implements OnInit, DoCheck {
 
 
   ngOnInit() {
-    this.hero1 = null;
-    this.hero2 = null;
+
   }
 
 
